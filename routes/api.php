@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\V1\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('v1/products', ProductController::class)
+      ->only(['index','show', 'destroy'])
+      ->middleware('auth:sanctum');
