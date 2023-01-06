@@ -8,6 +8,7 @@ git pull
 composer install
 php artisan sail:install
 ./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan route:list
 
 sail run in 0.0.0.0:80
