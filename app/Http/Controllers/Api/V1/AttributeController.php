@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\V1\ProductResource;
 
-class ProductController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,11 +28,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->name = $request->input('name');
-        $product->value = $request->input('value');
-        $product->description = $request->input('description');
-        $product->save();
+        $attribute = new Attribute();
+        $attribute->name = $request->input('name');
+        $attribute->type = $request->input('type');
+        $attribute->product_id = $request->input('product_id');
+        $attribute->save();
 
         return response()->json([
             'message' => 'Success'
@@ -53,15 +54,15 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Attribute $attribute)
     {
-        $product->name = $request->input('name');
-        $product->value = $request->input('value');
-        $product->description = $request->input('description');
-        $product->save();
+        $attribute->name = $request->input('name');
+        $attribute->type = $request->input('type');
+        $attribute->product_id = $request->input('product_id');
+        $attribute->save();
 
         return response()->json([
             'message' => 'Success'
@@ -71,12 +72,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Attribute $attribute)
     {
-        if($product->delete()){
+        if($attribute->delete()){
             return response()->json([
                 'message' => 'Success'
             ],204);

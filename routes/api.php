@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\V1\AttributeController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\ProductController;
 
@@ -24,5 +25,6 @@ use App\Http\Controllers\Api\V1\ProductController;
 Route::post('login', [LoginController::class, 'login']);
 
 Route::apiResource('v1/products', ProductController::class)
-      ->only(['index','show', 'destroy'])
+      ->middleware('auth:sanctum');
+Route::apiResource('v1/attributes', AttributeController::class)
       ->middleware('auth:sanctum');

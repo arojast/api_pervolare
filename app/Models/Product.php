@@ -15,4 +15,20 @@ class Product extends Model
         'value',
         'description'
     ];
+
+    public function attributes(){
+        $attributes = [];
+        $attributesQuery = Attribute::where('product_id',$this->id)->get();
+
+        foreach($attributesQuery as $a){
+            
+            if(!isset($attributes[$a->type])){
+                $attributes[$a->type] = [];    
+            }
+
+            $attributes[$a->type][] = $a->name;
+        }
+
+        return $attributes;
+    }
 }
